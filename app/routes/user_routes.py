@@ -1,0 +1,48 @@
+
+from flask import Blueprint, request, jsonify
+from ..models import db, User
+from ..utils import hash_password, verify_password
+from datetime import datetime
+
+bp = Blueprint('user', __name__)
+
+@bp.route('/register', methods=['POST'])
+def register():
+    data = request.get_json() or {}
+    if not data.get('email') or not data.get('password'):
+        return jsonify(msg='email and password required'), 400
+    if User.query.filter_by(email=data['email']).first():
+        return jsonify(msg='email exists'), 400
+    u = User(
+        email=data['email'],
+        password_hash=hash_password(data['password']),
+        nickname=data.get('nickname'),
+        device_info=request.headers.get('User-Agent')
+    )
+    db.session.add(u)
+    db.session.commit()
+    return jsonify(msg='registered', user_id=u.user_id), 200
+
+@bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json() or {}
+    u = User.query.filter_by(email=data.get('email')).first()
+    if not u or not verify_password(data.get('password',''), u.password_hash):
+        return jsonify(msg='invalid credentials'), 401
+    u.last_login_dt = datetime.utcnow()
+    db.session.commit()
+    return jsonify(msg='login ok', user_id=u.user_id), 200
+
+@bp.route('/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    u = User.query.get_or_404(user_id)
+    return jsonify(
+        user_id=u.user_id,
+        email=u.email,
+        nickname=u.nickname,
+        avatar_url=u.avatar_url,
+        theme_pref=u.theme_pref,
+        registration_dt=str(u.registration_dt),
+        last_login_dt=str(u.last_login_dt) if u.last_login_dt else None,
+        status=u.status
+    )
