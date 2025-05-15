@@ -64,13 +64,7 @@ class HealthTip(db.Model):
 
 #二期api
 
-class Friendship(db.Model):
-    __tablename__ = 'friendships'
-    friendship_id = db.Column(db.BigInteger, primary_key=True)
-    user_id       = db.Column(db.BigInteger, db.ForeignKey('users.user_id'), nullable=False)
-    friend_id     = db.Column(db.BigInteger, db.ForeignKey('users.user_id'), nullable=False)
-    created_dt    = db.Column(db.DateTime, default=datetime.utcnow)
-    is_blocked    = db.Column(db.Boolean, default=False)
+
 
     # 业务逻辑：不让自己加自己
     __table_args__ = (db.CheckConstraint('user_id <> friend_id', name='chk_not_self'),)
