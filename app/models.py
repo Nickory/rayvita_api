@@ -2,7 +2,7 @@
 from . import db
 from datetime import datetime
 
-
+from sqlalchemy.orm import relationship
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -90,13 +90,18 @@ class Friendship(db.Model):
     is_blocked    = db.Column(db.Boolean, default=False)
     created_dt    = db.Column(db.DateTime, default=datetime.utcnow)
 
+
+
 class FriendRequest(db.Model):
-    __tablename__ = 'friend_requests'
-    req_id      = db.Column(db.BigInteger, primary_key=True)
-    from_id     = db.Column(db.BigInteger, db.ForeignKey('users.user_id'), nullable=False)
-    to_id       = db.Column(db.BigInteger, db.ForeignKey('users.user_id'), nullable=False)
-    sent_dt     = db.Column(db.DateTime, default=datetime.utcnow)
-    status      = db.Column(db.Enum('pending','accepted','rejected'), default='pending')
+    __tablename__ = "friend_requests"
+
+    request_id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    from_user_id = db.Column(db.BigInteger, db.ForeignKey("users.user_id"), nullable=False)
+    to_user_id = db.Column(db.BigInteger, db.ForeignKey("users.user_id"), nullable=False)
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    status = db.Column(db.Enum("pending", "accepted", "rejected"), default="pending")
+
+    from_user = relationship("User", foreign_keys=[from_user_id])  
 
 class Post(db.Model):
     __tablename__ = 'posts'

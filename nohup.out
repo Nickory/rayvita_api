@@ -1,0 +1,1136 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.108.197:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [15/May/2025 20:39:02] "[33mGET / HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 20:39:14] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:39:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 20:40:05] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:08] "GET /api/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:26] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:27] "GET /api/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:29] "POST /api/twin/add HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:30] "GET /api/twin/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:30] "POST /api/session/create HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:31] "GET /api/session/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:31] "POST /api/rppg/add HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:32] "GET /api/rppg/session/5 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:33] "GET /api/tips/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:34] "[33mGET /api/auth/list/1 HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 20:40:35] "[31m[1mPOST /api/user/login HTTP/1.1[0m" 401 -
+[2025-05-15 20:40:36,050] ERROR in app: Exception on /api/friend/request [POST]
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'rayvita.friend_requests' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/root/rayvita_api/app/routes/friend_routes.py", line 13, in send_request
+    db.session.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/scoping.py", line 599, in commit
+    return self._proxied.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.ProgrammingError: (pymysql.err.ProgrammingError) (1146, "Table 'rayvita.friend_requests' doesn't exist")
+[SQL: INSERT INTO friend_requests (from_id, to_id, sent_dt, status) VALUES (%(from_id)s, %(to_id)s, %(sent_dt)s, %(status)s)]
+[parameters: {'from_id': 1, 'to_id': 2, 'sent_dt': datetime.datetime(2025, 5, 15, 12, 40, 36, 49089), 'status': 'pending'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+103.36.25.6 - - [15/May/2025 20:40:36] "[35m[1mPOST /api/friend/request HTTP/1.1[0m" 500 -
+103.36.25.6 - - [15/May/2025 20:40:36] "GET /api/friend/list?user_id=1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:37] "GET /api/friend/list?user_id=2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:38] "[33mPUT /api/friend/2/block HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 20:40:38] "[33mPUT /api/friend/2/block HTTP/1.1[0m" 404 -
+[2025-05-15 20:40:40,578] ERROR in app: Exception on /api/challenge/create [POST]
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'punch_count' in 'INSERT INTO'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/root/rayvita_api/app/routes/challenge_routes.py", line 18, in create_challenge
+    db.session.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/scoping.py", line 599, in commit
+    return self._proxied.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'punch_count' in 'INSERT INTO'")
+[SQL: INSERT INTO challenges (user_id, challenge_type, start_dt, end_dt, score, punch_count, rule_version) VALUES (%(user_id)s, %(challenge_type)s, %(start_dt)s, %(end_dt)s, %(score)s, %(punch_count)s, %(rule_version)s)]
+[parameters: {'user_id': 1, 'challenge_type': 'hr_stability', 'start_dt': datetime.datetime(2025, 5, 15, 12, 40, 40, 575238), 'end_dt': None, 'score': 0, 'punch_count': 0, 'rule_version': 'v1.0'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+103.36.25.6 - - [15/May/2025 20:40:40] "[35m[1mPOST /api/challenge/create HTTP/1.1[0m" 500 -
+103.36.25.6 - - [15/May/2025 20:40:41] "POST /api/post/create HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:42] "[33mGET /api/post/user/1 HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 20:40:42] "POST /api/post/3/like HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:43] "POST /api/post/3/comment HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:40:44] "[33mGET /api/notify/user/2 HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 20:54:10] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:54:21] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:54:25] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:58:05] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:58:07] "GET /api/twin/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:58:19] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:58:48] "GET /api/tips/user/2 HTTP/1.1" 200 -
+[2025-05-15 20:58:51,139] ERROR in app: Exception on /api/challenge/user/2 [GET]
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'challenges.punch_count' in 'SELECT'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/root/rayvita_api/app/routes/challenge_routes.py", line 43, in list_user_challenges
+    qs = Challenge.query.filter_by(user_id=user_id).order_by(Challenge.start_dt.desc()).all()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'challenges.punch_count' in 'SELECT'")
+[SQL: SELECT challenges.challenge_id AS challenges_challenge_id, challenges.user_id AS challenges_user_id, challenges.challenge_type AS challenges_challenge_type, challenges.start_dt AS challenges_start_dt, challenges.end_dt AS challenges_end_dt, challenges.score AS challenges_score, challenges.punch_count AS challenges_punch_count, challenges.rule_version AS challenges_rule_version 
+FROM challenges 
+WHERE challenges.user_id = %(user_id_1)s ORDER BY challenges.start_dt DESC]
+[parameters: {'user_id_1': 2}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+103.36.25.6 - - [15/May/2025 20:58:51] "[35m[1mGET /api/challenge/user/2 HTTP/1.1[0m" 500 -
+103.36.25.6 - - [15/May/2025 20:58:54] "GET /api/friend/list HTTP/1.1" 200 -
+[2025-05-15 20:58:59,095] ERROR in app: Exception on /api/friend/request [POST]
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'rayvita.friend_requests' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/root/rayvita_api/app/routes/friend_routes.py", line 13, in send_request
+    db.session.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/scoping.py", line 599, in commit
+    return self._proxied.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.ProgrammingError: (pymysql.err.ProgrammingError) (1146, "Table 'rayvita.friend_requests' doesn't exist")
+[SQL: INSERT INTO friend_requests (from_id, to_id, sent_dt, status) VALUES (%(from_id)s, %(to_id)s, %(sent_dt)s, %(status)s)]
+[parameters: {'from_id': 2, 'to_id': '1', 'sent_dt': datetime.datetime(2025, 5, 15, 12, 58, 59, 92721), 'status': 'pending'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+103.36.25.6 - - [15/May/2025 20:58:59] "[35m[1mPOST /api/friend/request HTTP/1.1[0m" 500 -
+103.36.25.6 - - [15/May/2025 20:58:59] "GET /api/friend/list HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:59:05] "GET /api/session/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:59:09] "GET /api/rppg/session/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:59:14] "GET /api/rppg/session/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 20:59:21] "GET /api/twin/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:23:35] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:29:35] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:30:11] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:30:28] "GET /api/twin/user/2 HTTP/1.1" 200 -
+[2025-05-15 21:30:51,061] ERROR in app: Exception on /api/twin/add [POST]
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'stress_level' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/root/rayvita_api/app/routes/twin_routes.py", line 21, in add_twin
+    db.session.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/scoping.py", line 599, in commit
+    return self._proxied.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'stress_level' at row 1")
+[SQL: INSERT INTO health_twin (user_id, snapshot_dt, avg_hr, avg_hrv, stress_level, sleep_quality, model_version, tips_text) VALUES (%(user_id)s, %(snapshot_dt)s, %(avg_hr)s, %(avg_hrv)s, %(stress_level)s, %(sleep_quality)s, %(model_version)s, %(tips_text)s)]
+[parameters: {'user_id': 2, 'snapshot_dt': datetime.datetime(2025, 5, 15, 13, 30, 51, 59623), 'avg_hr': '105', 'avg_hrv': '56.3', 'stress_level': '44', 'sleep_quality': 'bad', 'model_version': 'v1.0', 'tips_text': '请早睡觉'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+103.36.25.6 - - [15/May/2025 21:30:51] "[35m[1mPOST /api/twin/add HTTP/1.1[0m" 500 -
+103.36.25.6 - - [15/May/2025 21:30:51] "GET /api/twin/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:30:55] "GET /api/twin/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:31:02] "GET /api/twin/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:31:29] "GET /api/session/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:31:36] "GET /api/rppg/session/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:31:51] "POST /api/rppg/add HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:31:52] "GET /api/rppg/session/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:33:27] "GET /api/friend/list HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:33:43] "[33mGET /api/user/1. HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 21:33:44] "GET /api/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:33:46] "GET /api/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:33:46] "[33mGET /api/user/1. HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 21:33:49] "GET /api/user/1 HTTP/1.1" 200 -
+193.24.123.69 - - [15/May/2025 21:34:38] "[33mGET / HTTP/1.0[0m" 404 -
+193.24.123.69 - - [15/May/2025 21:35:13] "[33mGET /v2/_catalog HTTP/1.1[0m" 404 -
+193.24.123.69 - - [15/May/2025 21:35:40] code 400, message Bad request version ('g-k')
+193.24.123.69 - - [15/May/2025 21:35:40] "[35m[1m\x16\x03\x01\x05¨\x01\x00\x05¤\x03\x03\x85s\x0d)KÇ\x96×+87k§Ò@±aä§°\x1e\x8e\x02l:óGå!\x07\x0d\x89 £\x1dg-k[0m" HTTPStatus.BAD_REQUEST -
+193.24.123.69 - - [15/May/2025 21:35:41] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x05¨\x01\x00\x05¤\x03\x03\x81-à+ñ')
+193.24.123.69 - - [15/May/2025 21:35:41] "[35m[1m\x16\x03\x01\x05¨\x01\x00\x05¤\x03\x03\x81-à+ñ\x1f\x18[0m" HTTPStatus.BAD_REQUEST -
+193.24.123.69 - - [15/May/2025 21:35:42] "[33mGET /v2/_catalog HTTP/1.1[0m" 404 -
+193.24.123.69 - - [15/May/2025 21:35:42] code 400, message Bad request version ('À\x13À')
+193.24.123.69 - - [15/May/2025 21:35:42] "[35m[1m\x16\x03\x01\x05¨\x01\x00\x05¤\x03\x03ë8\x01Ã/\x08öû/ù\x90^\x03\x15\x9dmæ=\x0e\x05@\x1cï÷À2Ç@\x0e³\x95ê qe\x16\x07ÇRÿIý±ù/\x1a*OBõ½ÅG\x09\x8b\x00ø\x8f\x8e\x13\x17ö\x90\x9dÖ\x00\x1aÀ+À/À,À0Ì©Ì¨À\x09À\x13À[0m" HTTPStatus.BAD_REQUEST -
+193.24.123.69 - - [15/May/2025 21:35:44] "[33mGET /aab9 HTTP/1.1[0m" 404 -
+103.36.25.6 - - [15/May/2025 21:37:32] "OPTIONS /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:37:33] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:37:35] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:37:37] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:37:37] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:37:57] "OPTIONS /api/friend/request HTTP/1.1" 200 -
+[2025-05-15 21:37:58,120] ERROR in app: Exception on /api/friend/request [POST]
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'rayvita.friend_requests' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/root/rayvita_api/app/routes/friend_routes.py", line 13, in send_request
+    db.session.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/scoping.py", line 599, in commit
+    return self._proxied.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.ProgrammingError: (pymysql.err.ProgrammingError) (1146, "Table 'rayvita.friend_requests' doesn't exist")
+[SQL: INSERT INTO friend_requests (from_id, to_id, sent_dt, status) VALUES (%(from_id)s, %(to_id)s, %(sent_dt)s, %(status)s)]
+[parameters: {'from_id': None, 'to_id': 1, 'sent_dt': datetime.datetime(2025, 5, 15, 13, 37, 58, 119526), 'status': 'pending'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+103.36.25.6 - - [15/May/2025 21:37:58] "[35m[1mPOST /api/friend/request HTTP/1.1[0m" 500 -
+[2025-05-15 21:37:58,159] ERROR in app: Exception on /api/friend/request [POST]
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'rayvita.friend_requests' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/venv/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/root/rayvita_api/app/routes/friend_routes.py", line 13, in send_request
+    db.session.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/scoping.py", line 599, in commit
+    return self._proxied.commit()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/root/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 822, in _read_query_result
+    result.read()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "/root/venv/lib/python3.10/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/root/venv/lib/python3.10/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.ProgrammingError: (pymysql.err.ProgrammingError) (1146, "Table 'rayvita.friend_requests' doesn't exist")
+[SQL: INSERT INTO friend_requests (from_id, to_id, sent_dt, status) VALUES (%(from_id)s, %(to_id)s, %(sent_dt)s, %(status)s)]
+[parameters: {'from_id': None, 'to_id': 1, 'sent_dt': datetime.datetime(2025, 5, 15, 13, 37, 58, 157388), 'status': 'pending'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+103.36.25.6 - - [15/May/2025 21:37:58] "[35m[1mPOST /api/friend/request HTTP/1.1[0m" 500 -
+103.36.25.6 - - [15/May/2025 21:43:24] "GET /api/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 21:43:26] "GET /api/user/3 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:19:32] "GET /api/user/3 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:20:41] "GET /api/friend/list?user_id=2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:43:14] "GET /api/friend/list?user_id=1. HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:43:17] "GET /api/friend/list?user_id=1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:43:23] "GET /api/friend/list?user_id=1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:43:33] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:43:37] "GET /api/user/1 HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:43:47] "OPTIONS /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [15/May/2025 22:43:48] "[31m[1mPOST /api/user/login HTTP/1.1[0m" 401 -
+103.36.25.6 - - [15/May/2025 22:43:50] "[31m[1mPOST /api/user/login HTTP/1.1[0m" 401 -
+103.36.25.6 - - [15/May/2025 22:43:51] "[31m[1mPOST /api/user/login HTTP/1.1[0m" 401 -
+103.36.25.6 - - [15/May/2025 22:43:52] "[31m[1mPOST /api/user/login HTTP/1.1[0m" 401 -
+59.82.21.95 - - [15/May/2025 23:48:33] "[33mGET / HTTP/1.1[0m" 404 -
+59.82.21.17 - - [16/May/2025 00:57:26] "[33mGET / HTTP/1.1[0m" 404 -
+45.79.207.129 - - [16/May/2025 01:02:41] code 400, message Bad request version ('À\x14À')
+45.79.207.129 - - [16/May/2025 01:02:41] "[35m[1m\x16\x03\x01\x00u\x01\x00\x00q\x03\x03\x8ebZgæ \x1a\x09£²áË­í7Ëv\x00¯\x8a\x0dì8Àô\x1céÎp\x8c:Z\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+205.210.31.129 - - [16/May/2025 02:32:40] "[33mGET / HTTP/1.1[0m" 404 -
+198.235.24.193 - - [16/May/2025 04:40:14] "[33mGET / HTTP/1.0[0m" 404 -
+147.185.133.161 - - [16/May/2025 07:14:11] code 400, message Bad request version ('À\x13À')
+147.185.133.161 - - [16/May/2025 07:14:11] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03è\x9f,¤\x86´úÐ8\x1cå\x0fkª"³£\x9d{Pµ\x8bÐ\x032È·)\x1cGÉ\x80 ln¼Òõ¹s¸p\x07\x13à</ãu\x98VÐ¬\x04KhÙl?¬ykÒ&\x8b\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" HTTPStatus.BAD_REQUEST -
+147.185.133.161 - - [16/May/2025 07:14:11] code 400, message Bad request version ('À(À$À\x14À')
+147.185.133.161 - - [16/May/2025 07:14:11] "[35m[1m\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03Yè½ì\x8e[¸Ñ\x15EÂv¿@ äcÛ¬áp\x82#\x89ui\x8fÅöþýÈ\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\x09À(À$À\x14À[0m" HTTPStatus.BAD_REQUEST -
+64.62.197.157 - - [16/May/2025 09:15:36] "[33mGET / HTTP/1.1[0m" 404 -
+64.62.197.159 - - [16/May/2025 09:15:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+103.36.25.6 - - [16/May/2025 09:44:27] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 09:44:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+192.155.90.118 - - [16/May/2025 09:59:34] code 400, message Bad request version ('À\x14À')
+192.155.90.118 - - [16/May/2025 09:59:34] "[35m[1m\x16\x03\x01\x00{\x01\x00\x00w\x03\x035\x99\x97¢Ý\x83î"ã|á\x99%\x93HUNÁ_Ç\x7f!\x170Þ77\x83ª^\x1fè\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+194.0.234.34 - - [16/May/2025 10:34:39] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+194.0.234.34 - - [16/May/2025 10:34:39] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+198.235.24.211 - - [16/May/2025 10:42:01] "[33mGET / HTTP/1.1[0m" 404 -
+194.0.234.34 - - [16/May/2025 11:18:19] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+194.0.234.34 - - [16/May/2025 11:18:19] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+205.210.31.146 - - [16/May/2025 15:49:29] "[33mGET / HTTP/1.0[0m" 404 -
+103.36.25.6 - - [16/May/2025 15:55:57] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 15:55:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+103.36.25.6 - - [16/May/2025 16:30:24] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:30:46] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:34:13] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:34:16] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:34:16] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:34:17] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:42:14] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:44:13] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:44:13] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:44:25] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 16:44:26] "GET /api/user/2 HTTP/1.1" 200 -
+147.185.133.185 - - [16/May/2025 16:55:56] code 400, message Bad request version ('\x8dEø¨³\x99\x9e\x94"OB')
+147.185.133.185 - - [16/May/2025 16:55:56] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03­ß¯Â&­\x1a\x09hØ\x8b7PaAkm¸~ë>T|\x1d\x85znpvÅ\x91J UÇ\x01¦O\x85\x8dEø¨³\x99\x9e\x94"OB[0m" HTTPStatus.BAD_REQUEST -
+103.36.25.6 - - [16/May/2025 17:19:45] "[33mGET /api/user/43 HTTP/1.1[0m" 404 -
+103.36.25.6 - - [16/May/2025 17:19:48] "GET /api/user/5 HTTP/1.1" 200 -
+18.220.154.78 - - [16/May/2025 17:23:10] "[33mGET / HTTP/1.1[0m" 404 -
+103.36.25.6 - - [16/May/2025 17:23:15] "POST /api/user/register HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 17:23:49] "[31m[1mPOST /api/user/register HTTP/1.1[0m" 400 -
+103.36.25.6 - - [16/May/2025 17:24:15] "[31m[1mPOST /api/user/register HTTP/1.1[0m" 400 -
+103.36.25.6 - - [16/May/2025 17:24:44] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [16/May/2025 17:24:45] "GET /api/user/6 HTTP/1.1" 200 -
+18.220.154.78 - - [16/May/2025 17:30:44] code 400, message Bad request syntax ('SSH-2.0-Go')
+18.220.154.78 - - [16/May/2025 17:30:44] "[35m[1mSSH-2.0-Go[0m" HTTPStatus.BAD_REQUEST -
+167.94.138.50 - - [17/May/2025 01:42:54] code 400, message Bad request version ('À\x14À')
+167.94.138.50 - - [17/May/2025 01:42:54] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x7f\x963ÞÀmÒv¯)\x93MÏÝ´J&ìÂr3Ï\x857%\x91\\\x96:Ùk[ N)#wtÚUÚ&vo\x04\x16LêÝt\x83¾A¾\x9cý\x80®\\\x13?\x86*Tî\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+167.94.138.50 - - [17/May/2025 01:42:58] "[33mGET / HTTP/1.1[0m" 404 -
+167.94.138.50 - - [17/May/2025 01:43:12] "[33mGET / HTTP/1.1[0m" 404 -
+167.94.138.50 - - [17/May/2025 01:43:14] code 505, message Invalid HTTP version (2.0)
+167.94.138.50 - - [17/May/2025 01:43:14] "[35m[1mPRI * HTTP/2.0[0m" HTTPStatus.HTTP_VERSION_NOT_SUPPORTED -
+167.94.138.50 - - [17/May/2025 01:43:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+167.94.138.50 - - [17/May/2025 01:43:26] code 400, message Bad request version ('À\x14À')
+167.94.138.50 - - [17/May/2025 01:43:26] "[35m[1m\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03\x0eéóùÏ!Þ\x83"\x8e\x07Û<*\x08\x93æLÊàB5\x08&\x9aí\x96¸ç&ú§ ·,]ØÚ\x07çÂ\x10e¢÷èzjÊ4\x94\x84Wò\x16oxj7\x81\x1a\x0e¶¡#\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+198.235.24.24 - - [17/May/2025 02:23:33] "[33mGET / HTTP/1.0[0m" 404 -
+31.7.62.234 - - [17/May/2025 04:33:02] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+31.7.62.234 - - [17/May/2025 04:33:02] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+93.123.109.71 - - [17/May/2025 05:07:33] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+93.123.109.71 - - [17/May/2025 05:07:33] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+198.235.24.137 - - [17/May/2025 05:44:29] "[33mGET / HTTP/1.1[0m" 404 -
+59.82.21.177 - - [17/May/2025 06:23:25] code 400, message Bad request version ("æ¯ùK\x00\x00VÀ,À+À0À/\x00\x9f\x00£\x00\x9e\x00¢À$À(À#À'\x00k\x00j\x00g\x00@À.À2À-À1À&À*À%À)À")
+59.82.21.177 - - [17/May/2025 06:23:25] "[35m[1m\x16\x03\x03\x01\x02\x01\x00\x00þ\x03\x03g$\x13\x8bû5\x12\x84þ\x9e\x81\x04\x93¯súÕ]#\x95\x09ü¢Á\x87.a\x0dæ¯ùK\x00\x00VÀ,À+À0À/\x00\x9f\x00£\x00\x9e\x00¢À$À(À#À'\x00k\x00j\x00g\x00@À.À2À-À1À&À*À%À)À[0m" HTTPStatus.BAD_REQUEST -
+59.82.21.246 - - [17/May/2025 06:23:35] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x03\x01\x02\x01\x00\x00þ\x03\x03\x11uê')
+59.82.21.246 - - [17/May/2025 06:23:35] "[35m[1m\x16\x03\x03\x01\x02\x01\x00\x00þ\x03\x03\x11uê\x1c¨Æ[0m" HTTPStatus.BAD_REQUEST -
+167.94.146.59 - - [17/May/2025 08:37:36] code 400, message Bad request version ('Ì\x0e£df\x99-aNí\x0f}')
+167.94.146.59 - - [17/May/2025 08:37:36] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03»\x1dÛ¨Ü\x01A\x135ô\x85tw\x92[õ{ì\x18Ü³\x8cçgS½Â2´MÑé Ì\x0e£df\x99-aNí\x0f}[0m" HTTPStatus.BAD_REQUEST -
+167.94.146.59 - - [17/May/2025 08:37:40] "[33mGET / HTTP/1.1[0m" 404 -
+167.94.146.59 - - [17/May/2025 08:37:43] "[33mGET / HTTP/1.1[0m" 404 -
+167.94.146.59 - - [17/May/2025 08:37:44] code 505, message Invalid HTTP version (2.0)
+167.94.146.59 - - [17/May/2025 08:37:44] "[35m[1mPRI * HTTP/2.0[0m" HTTPStatus.HTTP_VERSION_NOT_SUPPORTED -
+167.94.146.59 - - [17/May/2025 08:38:04] code 400, message Bad request version ('À\x14À')
+167.94.146.59 - - [17/May/2025 08:38:04] "[35m[1m\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03Ù¸<\x1a'2¿³pµ¢ -øû¨~\x00qù\x9a­ÄÊ¬\x99æ\x7f\x8f»\x01Ï =ã²\x7fÉk/X×\x8eØý\x83þ7°ì\x0dgCiâÎ¡~Ë¥Ì\x8c5vÒ\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+198.235.24.168 - - [17/May/2025 09:16:40] "[33mGET / HTTP/1.1[0m" 404 -
+83.222.190.78 - - [17/May/2025 10:21:10] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+83.222.190.78 - - [17/May/2025 10:21:10] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+35.203.210.31 - - [17/May/2025 10:43:07] code 400, message Bad request version ('À\x13À')
+35.203.210.31 - - [17/May/2025 10:43:07] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03ã¾ÓõP\x1d\x03\x00Ð\x82õæ¿txÿ{r¥\x130\x84R/\x18shbä\x8e\x04Â s«·#8\x1cÅDPÇ¤Õasôïn\x8c\x85ö\x0eqömúxÚ÷\x9e\x1e^ð\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" HTTPStatus.BAD_REQUEST -
+35.203.210.31 - - [17/May/2025 10:43:08] code 400, message Bad request version ('À(À$À\x14À')
+35.203.210.31 - - [17/May/2025 10:43:08] "[35m[1m\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03t8Y\\-ç~öÞ4Ñ&Ä\x1f\x9a=\x91×Ì§¡L\x06É<A\x17;jç\x8c¡\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\x09À(À$À\x14À[0m" HTTPStatus.BAD_REQUEST -
+178.159.37.70 - - [17/May/2025 11:38:19] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+178.159.37.70 - - [17/May/2025 11:38:19] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+45.142.193.72 - - [17/May/2025 12:08:35] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+45.142.193.72 - - [17/May/2025 12:08:35] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+39.99.229.105 - - [17/May/2025 14:40:05] code 400, message Bad request syntax ('00000000000000000000')
+39.99.229.105 - - [17/May/2025 14:40:05] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.229.105 - - [17/May/2025 14:40:05] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.229.105 - - [17/May/2025 14:40:05] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.229.105 - - [17/May/2025 14:40:05] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.233.75 - - [17/May/2025 14:41:58] code 400, message Bad request syntax ('00000000000000000000')
+39.99.233.75 - - [17/May/2025 14:41:58] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.233.75 - - [17/May/2025 14:41:58] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.233.75 - - [17/May/2025 14:41:58] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.233.75 - - [17/May/2025 14:41:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.239.183 - - [17/May/2025 14:43:18] code 400, message Bad request syntax ('00000000000000000000')
+39.99.239.183 - - [17/May/2025 14:43:18] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.239.183 - - [17/May/2025 14:43:18] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.146.226 - - [17/May/2025 14:43:38] code 400, message Bad request syntax ('00000000000000000000')
+39.99.146.226 - - [17/May/2025 14:43:38] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.146.226 - - [17/May/2025 14:43:38] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.146.226 - - [17/May/2025 14:43:38] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.146.226 - - [17/May/2025 14:43:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.237.229 - - [17/May/2025 14:44:03] code 400, message Bad request syntax ('00000000000000000000')
+39.99.237.229 - - [17/May/2025 14:44:03] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.237.229 - - [17/May/2025 14:44:03] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.237.229 - - [17/May/2025 14:44:03] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.237.229 - - [17/May/2025 14:44:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.239.77 - - [17/May/2025 14:46:17] code 400, message Bad request syntax ('00000000000000000000')
+39.99.239.77 - - [17/May/2025 14:46:17] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.239.77 - - [17/May/2025 14:46:17] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.239.77 - - [17/May/2025 14:46:17] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.239.77 - - [17/May/2025 14:46:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.229.105 - - [17/May/2025 14:47:11] code 400, message Bad request syntax ('00000000000000000000')
+39.99.229.105 - - [17/May/2025 14:47:11] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.229.105 - - [17/May/2025 14:47:11] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.229.105 - - [17/May/2025 14:47:11] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.229.105 - - [17/May/2025 14:47:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+36.41.65.20 - - [17/May/2025 14:47:26] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.233.75 - - [17/May/2025 14:49:44] code 400, message Bad request syntax ('00000000000000000000')
+39.99.233.75 - - [17/May/2025 14:49:44] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.233.75 - - [17/May/2025 14:49:44] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.233.75 - - [17/May/2025 14:49:44] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.233.75 - - [17/May/2025 14:49:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.237.229 - - [17/May/2025 14:53:36] code 400, message Bad request syntax ('00000000000000000000')
+39.99.237.229 - - [17/May/2025 14:53:36] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.237.229 - - [17/May/2025 14:53:36] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.237.229 - - [17/May/2025 14:53:36] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.237.229 - - [17/May/2025 14:53:37] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.132.191 - - [17/May/2025 14:57:04] code 400, message Bad request syntax ('00000000000000000000')
+39.99.132.191 - - [17/May/2025 14:57:04] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.132.191 - - [17/May/2025 14:57:04] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.132.191 - - [17/May/2025 14:57:04] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.132.191 - - [17/May/2025 14:57:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.241.154 - - [17/May/2025 14:58:13] code 400, message Bad request syntax ('00000000000000000000')
+39.99.241.154 - - [17/May/2025 14:58:13] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.241.154 - - [17/May/2025 14:58:14] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.241.154 - - [17/May/2025 14:58:14] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.241.154 - - [17/May/2025 14:58:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.146.226 - - [17/May/2025 14:58:52] code 400, message Bad request syntax ('00000000000000000000')
+39.99.146.226 - - [17/May/2025 14:58:52] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.146.226 - - [17/May/2025 14:58:52] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.146.226 - - [17/May/2025 14:58:52] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.146.226 - - [17/May/2025 14:58:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.239.250 - - [17/May/2025 14:59:36] code 400, message Bad request syntax ('00000000000000000000')
+39.99.239.250 - - [17/May/2025 14:59:36] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.239.250 - - [17/May/2025 14:59:36] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.239.250 - - [17/May/2025 14:59:36] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.239.250 - - [17/May/2025 14:59:36] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.241.154 - - [17/May/2025 15:00:53] code 400, message Bad request syntax ('00000000000000000000')
+39.99.241.154 - - [17/May/2025 15:00:53] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.241.154 - - [17/May/2025 15:00:53] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.241.154 - - [17/May/2025 15:00:53] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.241.154 - - [17/May/2025 15:00:53] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.239.183 - - [17/May/2025 15:01:38] code 400, message Bad request syntax ('00000000000000000000')
+39.99.239.183 - - [17/May/2025 15:01:38] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.239.183 - - [17/May/2025 15:01:38] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.239.183 - - [17/May/2025 15:01:38] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.239.183 - - [17/May/2025 15:01:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.229.105 - - [17/May/2025 15:02:09] code 400, message Bad request syntax ('00000000000000000000')
+39.99.229.105 - - [17/May/2025 15:02:09] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.229.105 - - [17/May/2025 15:02:09] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.229.105 - - [17/May/2025 15:02:09] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.229.105 - - [17/May/2025 15:02:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.235.16 - - [17/May/2025 15:06:20] code 400, message Bad request syntax ('00000000000000000000')
+39.99.235.16 - - [17/May/2025 15:06:20] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.235.16 - - [17/May/2025 15:06:20] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.235.16 - - [17/May/2025 15:06:20] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.235.16 - - [17/May/2025 15:06:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+93.123.109.71 - - [17/May/2025 15:07:21] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+93.123.109.71 - - [17/May/2025 15:07:21] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+39.99.132.191 - - [17/May/2025 15:07:36] code 400, message Bad request syntax ('00000000000000000000')
+39.99.132.191 - - [17/May/2025 15:07:36] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.132.191 - - [17/May/2025 15:07:36] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.132.191 - - [17/May/2025 15:07:36] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.132.191 - - [17/May/2025 15:07:36] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.238.100 - - [17/May/2025 15:09:37] code 400, message Bad request syntax ('00000000000000000000')
+39.99.238.100 - - [17/May/2025 15:09:37] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.238.100 - - [17/May/2025 15:09:37] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.238.100 - - [17/May/2025 15:09:37] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.238.100 - - [17/May/2025 15:09:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.146.226 - - [17/May/2025 15:10:11] code 400, message Bad request syntax ('00000000000000000000')
+39.99.146.226 - - [17/May/2025 15:10:11] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.146.226 - - [17/May/2025 15:10:11] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.146.226 - - [17/May/2025 15:10:11] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.146.226 - - [17/May/2025 15:10:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+39.99.132.191 - - [17/May/2025 15:14:00] code 400, message Bad request syntax ('00000000000000000000')
+39.99.132.191 - - [17/May/2025 15:14:00] "[35m[1m00000000000000000000[0m" HTTPStatus.BAD_REQUEST -
+39.99.132.191 - - [17/May/2025 15:14:00] "[33mGET / HTTP/1.0[0m" 404 -
+39.99.132.191 - - [17/May/2025 15:14:00] "[33mGET / HTTP/1.1[0m" 404 -
+39.99.132.191 - - [17/May/2025 15:14:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+178.159.37.70 - - [17/May/2025 15:17:45] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+178.159.37.70 - - [17/May/2025 15:17:45] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+31.7.62.234 - - [17/May/2025 15:23:50] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+31.7.62.234 - - [17/May/2025 15:23:50] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+195.184.76.5 - - [17/May/2025 15:40:09] code 400, message Bad request version ('×F\x1b?éÇÝ¯`ÁO-§ÌÝë½ß\x83Ïb#½')
+195.184.76.5 - - [17/May/2025 15:40:09] "[35m[1m\x16\x03\x03\x01¦\x01\x00\x01¢\x03\x03d*\x1e³!Ãb²\x99\x0cû\x04¸+|\x0c#ã\x03ÝÍ1\x90ªÞ\x1a±=Ùã\x92\x11 +ù§\x1c×F\x1b?éÇÝ¯`ÁO-§ÌÝë½ß\x83Ïb#½[0m" HTTPStatus.BAD_REQUEST -
+195.184.76.231 - - [17/May/2025 15:40:14] "[33mGET / HTTP/1.1[0m" 404 -
+195.184.76.1 - - [17/May/2025 15:53:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+147.185.132.55 - - [17/May/2025 15:59:58] "[33mGET / HTTP/1.0[0m" 404 -
+83.222.190.78 - - [17/May/2025 16:56:45] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+83.222.190.78 - - [17/May/2025 16:56:45] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+3.137.73.221 - - [17/May/2025 17:22:59] "[33mGET / HTTP/1.1[0m" 404 -
+3.137.73.221 - - [17/May/2025 17:27:37] code 400, message Bad request version ('À\x14À')
+3.137.73.221 - - [17/May/2025 17:27:37] "[35m[1m\x16\x03\x01\x00{\x01\x00\x00w\x03\x03<¿ÚÇÅ·\x12µ¸\x97f¬\x9f9;\x08W]\x1d¼ =æ°Àé-nÃé\x90\x88\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+3.137.73.221 - - [17/May/2025 17:29:33] code 400, message Bad request syntax ('SSH-2.0-Go')
+3.137.73.221 - - [17/May/2025 17:29:33] "[35m[1mSSH-2.0-Go[0m" HTTPStatus.BAD_REQUEST -
+3.137.73.221 - - [17/May/2025 17:31:36] code 400, message Bad request version ('À\x14À')
+3.137.73.221 - - [17/May/2025 17:31:36] "[35m[1m\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ÉrÞ75%H6ûy\x0cwµ;ÎÈ~3-w\x9eÅ;Sê\x19\x1aÚ\x96Ùet\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+111.7.96.147 - - [17/May/2025 18:04:29] code 400, message Bad request version ('À\x13À')
+111.7.96.147 - - [17/May/2025 18:04:29] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03I\x06²ù¼\x99iÀYûøºe-\x83Ud]\x0e\x8d·b8´gÆÝ9dZ8f gÁ\x81i³öòË°©\x19NÖ½\x95g|püé<Z¡\x90T·é¥8'O;\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" HTTPStatus.BAD_REQUEST -
+111.7.96.147 - - [17/May/2025 18:04:39] "[33mGET / HTTP/1.1[0m" 404 -
+113.141.87.68 - - [17/May/2025 18:04:58] "[33mGET / HTTP/1.1[0m" 404 -
+74.82.47.3 - - [17/May/2025 19:23:20] "[33mGET / HTTP/1.1[0m" 404 -
+74.82.47.3 - - [17/May/2025 19:23:37] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+222.94.238.54 - - [17/May/2025 19:29:21] "GET /api/user/5 HTTP/1.1" 200 -
+222.94.238.54 - - [17/May/2025 19:29:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+103.36.25.6 - - [17/May/2025 19:31:14] "GET /api/user/6 HTTP/1.1" 200 -
+103.36.25.6 - - [17/May/2025 19:31:19] "[33mGET /api/user/7 HTTP/1.1[0m" 404 -
+134.209.228.153 - - [17/May/2025 19:51:33] "[33mGET / HTTP/1.0[0m" 404 -
+178.128.199.39 - - [17/May/2025 19:51:34] "[33mGET /solr/admin/info/system HTTP/1.1[0m" 404 -
+46.101.123.72 - - [17/May/2025 19:51:34] code 400, message Bad request version ("\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ")
+46.101.123.72 - - [17/May/2025 19:51:34] "[35m[1m\x16\x03\x01\x01$\x01\x00\x01 \x03\x03\x0e\x06-b\x96ã5¬êùã+×sÍw\x13\x1aêù£¡ÞLÑ\x90.Àp;\x98  \x91 \x97ù\x02i Ôô\x7f\x09ú~.\x04\x16\x1a4~¾·Y®î×Â\x02Á\x1e:\x1a\x0b\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ[0m" HTTPStatus.BAD_REQUEST -
+165.227.157.217 - - [17/May/2025 19:51:34] "[33mGET / HTTP/1.1[0m" 404 -
+46.101.96.144 - - [17/May/2025 19:51:34] "[33mGET /v2/_catalog HTTP/1.1[0m" 404 -
+207.154.230.169 - - [17/May/2025 19:51:34] "[33mGET /cgi-bin/authLogin.cgi HTTP/1.1[0m" 404 -
+157.230.108.201 - - [17/May/2025 19:51:34] code 400, message Bad request version ('ó\x0e0Yl?\x03å')
+157.230.108.201 - - [17/May/2025 19:51:34] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x1a\x80ý\x86Áµ\x1f\x8ab\x9cwá[u`«`\x0füv\x1f\x1am*)g\x06ÅÇ\x875= ó\x0e0Yl?\x03å[0m" HTTPStatus.BAD_REQUEST -
+178.128.199.39 - - [17/May/2025 19:51:34] "[33mGET /solr/admin/cores?action=STATUS&wt=json HTTP/1.1[0m" 404 -
+167.172.99.113 - - [17/May/2025 19:51:35] "[33mGET /query?q=SHOW+DIAGNOSTICS HTTP/1.1[0m" 404 -
+157.230.108.201 - - [17/May/2025 19:51:35] code 400, message Bad request version ('À\x13À')
+157.230.108.201 - - [17/May/2025 19:51:35] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\\\x130\x1dÙDì\x01f¶u\x06|E\x97MÅÌ²\x87Ãýê'Í\x09È¹[ÅÂú å`\x82\\a|:\x8bT\x14¸\x00\x14vÍ\x04\x011å~¨\x86Á\x9aÁI«\x86\x08.\x0d§\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" HTTPStatus.BAD_REQUEST -
+178.128.221.39 - - [17/May/2025 19:51:37] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+165.227.162.41 - - [17/May/2025 20:28:37] "[33mGET / HTTP/1.0[0m" 404 -
+64.226.64.155 - - [17/May/2025 20:28:38] "[33mGET /query?q=SHOW+DIAGNOSTICS HTTP/1.1[0m" 404 -
+178.128.199.39 - - [17/May/2025 20:28:38] code 400, message Bad request version ('m»\x86GÇÊWJ±\x11\x16+k\x02V#\x02¶')
+178.128.199.39 - - [17/May/2025 20:28:38] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x88à\x0c1¶\x98\x9b\\º4\x93­\x1cr>\x1f·Ô\x0c"ázlC­|ßU\x16e<v W\x0bm»\x86GÇÊWJ±\x11\x16+k\x02V#\x02¶[0m" HTTPStatus.BAD_REQUEST -
+46.101.123.72 - - [17/May/2025 20:28:38] "[33mGET /solr/admin/info/system HTTP/1.1[0m" 404 -
+207.154.230.169 - - [17/May/2025 20:28:38] "[33mGET /v2/_catalog HTTP/1.1[0m" 404 -
+178.128.199.39 - - [17/May/2025 20:28:38] code 400, message Bad request version ('À\x13À')
+178.128.199.39 - - [17/May/2025 20:28:38] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03ä«s'\x1e'Õ)\x92A½¹\x7f~\x97\x0f\x86÷\x96)¤\x0e,Ï\x80\x1d\x8d4\x1a&Ì\x94 Ü-\x9d\x9a\x87\x947\x94½\x93\x08K½m4\x1få~o)1Ú¹òó\x8a\x9cÜ\x0eW\x86Ä\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" HTTPStatus.BAD_REQUEST -
+167.71.41.125 - - [17/May/2025 20:28:39] code 400, message Bad request version ("\x06o)\x90°GujM\x969/&tÖíxT±\x19ßçý\x92×©t±\x19\x00\x9bU\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ")
+167.71.41.125 - - [17/May/2025 20:28:39] "[35m[1m\x16\x03\x01\x01$\x01\x00\x01 \x03\x03Æ \x97»\x01>AJ¯1N\x9bAè}m~\x8a6¤Ö\x09­ª®ì\x19¿M\x02»P \x06o)\x90°GujM\x969/&tÖíxT±\x19ßçý\x92×©t±\x19\x00\x9bU\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ[0m" HTTPStatus.BAD_REQUEST -
+46.101.123.72 - - [17/May/2025 20:28:39] "[33mGET /solr/admin/cores?action=STATUS&wt=json HTTP/1.1[0m" 404 -
+207.154.235.56 - - [17/May/2025 20:28:39] "[33mGET / HTTP/1.1[0m" 404 -
+157.230.108.201 - - [17/May/2025 20:28:41] "[33mGET /cgi-bin/authLogin.cgi HTTP/1.1[0m" 404 -
+128.199.164.57 - - [17/May/2025 20:28:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+192.241.185.12 - - [18/May/2025 00:09:06] code 400, message Bad request version ('À\x14À')
+192.241.185.12 - - [18/May/2025 00:09:06] "[35m[1m\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x8b\x1f\x00·\x1e\x13¶\x00}b#\x15-D\x02¾f:â\x1d@\x8d\x08ð¿\x10FÉÎ\x16±!\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+192.241.185.12 - - [18/May/2025 00:09:06] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ð9Ðì\x01k\x83U³/y.Ø÷¸o\x84\x04\x12\x02\x9a\x98ÈUFLÅ¨\x15F-\x08\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+192.241.185.12 - - [18/May/2025 00:09:06] "[35m[1m\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ð9Ðì\x01k\x83U³/y.Ø÷¸o\x84\x04\x12\x02\x9a\x98ÈUFLÅ¨\x15F-\x08\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\x09À\x14À[0m" HTTPStatus.BAD_REQUEST -
+192.241.185.12 - - [18/May/2025 00:09:07] "[33mGET / HTTP/1.1[0m" 404 -
+178.173.242.224 - - [18/May/2025 02:15:40] code 400, message Bad request syntax ('\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x03\x00\x00\x00')
+178.173.242.224 - - [18/May/2025 02:15:40] "[35m[1m\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x03\x00\x00\x00[0m" HTTPStatus.BAD_REQUEST -
+31.7.62.234 - - [18/May/2025 04:49:28] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+31.7.62.234 - - [18/May/2025 04:49:28] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+93.123.109.71 - - [18/May/2025 06:09:25] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+93.123.109.71 - - [18/May/2025 06:09:25] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+101.251.238.173 - - [18/May/2025 07:09:41] code 400, message Bad request version ('\x17Á\x8c"£ì?QµÀHÚB\x13%Êúr.DíÆÁR\x89ÒÒ¢\x0e9dþ\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À\'\x00gÀ')
+101.251.238.173 - - [18/May/2025 07:09:41] "[35m[1m\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03^º4ifv\x04®\x0d.úô\x02\x06\x17«>®\x8añ7\x92\x8eð\x0e½Rý¶æôú \x17Á\x8c"£ì?QµÀHÚB\x13%Êúr.DíÆÁR\x89ÒÒ¢\x0e9dþ\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ[0m" HTTPStatus.BAD_REQUEST -
+101.251.238.173 - - [18/May/2025 07:09:42] "[33mGET / HTTP/1.1[0m" 404 -
+101.251.238.173 - - [18/May/2025 07:10:40] code 400, message Bad request version ("\x80\x8eÚíßïà\x9d\x1bè0\x03\x84{\x98_£\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ")
+101.251.238.173 - - [18/May/2025 07:10:40] "[35m[1m\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03ß\x0b,È^Uº¼æPX}\x89\x12ucF¢?nÌíö\x17)\x0fRk\x94ºZQ \x06 ó\x93rñ\x9dy\x88\x88Óä^Ú\x1f\x80\x8eÚíßïà\x9d\x1bè0\x03\x84{\x98_£\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ[0m" HTTPStatus.BAD_REQUEST -
+101.251.238.173 - - [18/May/2025 07:10:42] "[33mGET / HTTP/1.1[0m" 404 -
+101.251.238.173 - - [18/May/2025 07:11:18] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03ô½ß\x10Á÷ÞeP\x17Ë\x13\x06%\x19£ÿe:8~È°\x90MI¸#\x04s]¦')
+101.251.238.173 - - [18/May/2025 07:11:18] "[35m[1m\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03ô½ß\x10Á÷ÞeP\x17Ë\x13\x06%\x19£ÿe:8~È°\x90MI¸#\x04s]¦ \x12µÚ\x8fmÑÿJty9v÷'UCã\x00âx\x8c=ñ\x80vo@gZ¸«¬\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ[0m" HTTPStatus.BAD_REQUEST -
+101.251.238.173 - - [18/May/2025 07:11:18] "[33mGET / HTTP/1.1[0m" 404 -
+223.113.128.133 - - [18/May/2025 08:32:06] "[33mGET / HTTP/1.1[0m" 404 -
+223.113.128.133 - - [18/May/2025 08:32:07] code 400, message Bad request version ('À\x13À')
+223.113.128.133 - - [18/May/2025 08:32:07] "[35m[1m\x16\x03\x01\x00ò\x01\x00\x00î\x03\x03\x1e8\\\x93È*3â%º\x11y=]NZ3\x0eÁü\x946<Æ\x0b$ì\x8e<ê°ø ¿è\x8d^\x03\x00CÈ²\x85=î\x84i;±Æ÷\x8aÏ\x9a¼G\x8a\x80Ë£\x93ü;D¾\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" HTTPStatus.BAD_REQUEST -
+223.113.128.133 - - [18/May/2025 08:32:07] code 400, message Bad HTTP/0.9 request type ('t3')
+223.113.128.133 - - [18/May/2025 08:32:07] "[35m[1mt3 12.1.2[0m" HTTPStatus.BAD_REQUEST -
+106.75.64.160 - - [18/May/2025 08:32:32] "[33mGET / HTTP/1.1[0m" 404 -
+106.75.64.160 - - [18/May/2025 08:32:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+106.75.64.160 - - [18/May/2025 08:32:32] "[33mGET /sitemap.xml HTTP/1.1[0m" 404 -
+106.75.64.160 - - [18/May/2025 08:32:32] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+147.185.132.171 - - [18/May/2025 08:53:48] "[33mGET / HTTP/1.0[0m" 404 -
+61.129.155.196 - - [18/May/2025 09:17:59] "[33mGET / HTTP/1.0[0m" 404 -
+61.129.155.196 - - [18/May/2025 09:18:03] "[33mHEAD / HTTP/1.1[0m" 404 -
+61.129.155.196 - - [18/May/2025 09:18:03] "[33mGET / HTTP/1.1[0m" 404 -
+61.129.155.196 - - [18/May/2025 09:18:13] code 400, message Bad request version ('\x97thó[§a\x02\x89?©bÆ\x12\x19&Ür\x94\x94K\x16gíñï`f\x16ü7Ç\x00®\x13\x02\x13\x03\x13\x01\x00\x05\x00\x16\x003\x009\x005\x00')
+61.129.155.196 - - [18/May/2025 09:18:13] "[35m[1m\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03ÜT'\x1cÑªXÆ)\x87¤Çij\x95\x11'\x0c*ÌÓ®&# ´vH«\\¥u \x97thó[§a\x02\x89?©bÆ\x12\x19&Ür\x94\x94K\x16gíñï`f\x16ü7Ç\x00®\x13\x02\x13\x03\x13\x01\x00\x05\x00\x16\x003\x009\x005\x00[0m" HTTPStatus.BAD_REQUEST -
+162.216.150.219 - - [18/May/2025 09:44:41] code 400, message Bad request version ('æ3m£BýÀ§\x90÷\x1b1;\x07')
+162.216.150.219 - - [18/May/2025 09:44:41] "[35m[1m\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03o_êtým\x7f>øI3\x0co\x85æ3m£BýÀ§\x90÷\x1b1;\x07[0m" HTTPStatus.BAD_REQUEST -
+162.216.150.219 - - [18/May/2025 09:44:41] code 400, message Bad request version ('À(À$À\x14À')
+162.216.150.219 - - [18/May/2025 09:44:41] "[35m[1m\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03×\x16+\x977\x92L!§9\x8fô\x1c\x10cE6ª\\ß±'\x05âöï\x18¥\x17Q,æ\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\x09À(À$À\x14À[0m" HTTPStatus.BAD_REQUEST -
+178.62.249.231 - - [18/May/2025 09:56:26] "[33mGET / HTTP/1.1[0m" 404 -
+178.62.249.231 - - [18/May/2025 09:56:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+178.159.37.112 - - [18/May/2025 10:01:01] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+178.159.37.112 - - [18/May/2025 10:01:01] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+198.235.24.129 - - [18/May/2025 11:35:04] "[33mGET / HTTP/1.0[0m" 404 -
+147.185.132.96 - - [18/May/2025 13:09:58] "[33mGET / HTTP/1.1[0m" 404 -
+178.159.37.112 - - [18/May/2025 13:16:29] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+178.159.37.112 - - [18/May/2025 13:16:29] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+93.123.109.71 - - [18/May/2025 14:12:16] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+93.123.109.71 - - [18/May/2025 14:12:16] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+205.210.31.134 - - [18/May/2025 14:14:40] "[33mGET / HTTP/1.1[0m" 404 -
+222.94.238.54 - - [18/May/2025 15:27:45] "[31m[1mPOST /api/user/login HTTP/1.1[0m" 401 -
+222.94.238.54 - - [18/May/2025 15:27:52] "POST /api/user/login HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:27:52] "GET /api/user/2 HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:30:50] "POST /api/user/login HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:30:50] "GET /api/user/2 HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:34:42] "POST /api/user/login HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:34:43] "GET /api/user/2 HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:40:19] "POST /api/user/login HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:40:19] "GET /api/user/2 HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:43:27] "[33mPOST /api/user/send_verification HTTP/1.1[0m" 404 -
+222.94.238.54 - - [18/May/2025 15:52:47] "POST /api/user/login HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 15:52:48] "GET /api/user/2 HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 16:02:10] "POST /api/user/login HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 16:02:10] "GET /api/user/2 HTTP/1.1" 200 -
+83.222.190.78 - - [18/May/2025 16:25:52] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+83.222.190.78 - - [18/May/2025 16:25:52] "[35m[1m\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr[0m" HTTPStatus.BAD_REQUEST -
+222.94.238.54 - - [18/May/2025 16:28:55] "[33mPOST /api/user/send_verification HTTP/1.1[0m" 404 -
+222.94.238.54 - - [18/May/2025 16:29:58] "[33mPOST /api/user/send_verification HTTP/1.1[0m" 404 -
+222.94.238.54 - - [18/May/2025 16:32:03] "POST /api/user/login HTTP/1.1" 200 -
+222.94.238.54 - - [18/May/2025 16:32:04] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [18/May/2025 16:36:17] "POST /api/user/login HTTP/1.1" 200 -
+103.36.25.6 - - [18/May/2025 16:36:19] "GET /api/user/2 HTTP/1.1" 200 -
+103.36.25.6 - - [18/May/2025 16:46:33] "[33mPOST /api/user/reset_password HTTP/1.1[0m" 404 -
